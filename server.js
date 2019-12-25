@@ -2,7 +2,7 @@ const express = require('express'),
   app = express(),
   bodyParser = require('body-parser');
   port = process.env.PORT || 3000;
-
+  const multer = require('multer');
 
 const mysql = require('mysql');
 // connection configurations
