@@ -29,8 +29,8 @@ Estate.createEstate = function (newEstate, result) {
                 }
             });
 };
-Estate.getEstateById = function (EstateId, result) {
-        sql.query("Select Estate from Estates where id = ? ", EstateId, function (err, res) {
+Estate.getEstateById = function (owner, result) {
+        sql.query("SELECT * FROM `estates` WHERE owner =?", owner, function (err, res) {
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);

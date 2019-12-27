@@ -26,7 +26,7 @@ exports.create_a_Estate = function(req, res) {
 
 
 exports.read_a_Estate = function(req, res) {
-  Estate.getEstateById(req.params.Estatename,req.params.Password, function(err, Estate) {
+  Estate.getEstateById(req.params.owner, function(err, Estate) {
     if (err)
       res.send(err);
     res.json(Estate);

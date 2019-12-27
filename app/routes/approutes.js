@@ -20,6 +20,8 @@ var upload = multer({storage: storage})
 app.route('/Estates')
 .get(EstateManager.list_all_Estates)
 .post(EstateManager.create_a_Estate);
+app.route('/Estates/:owner')
+.get(EstateManager.read_a_Estate)
 app.route('/tasks')
     .get(todoList.list_all_tasks)
     .post(todoList.create_a_task);
@@ -61,7 +63,6 @@ app.route('/tasks')
             [
                 filename,
                 req.body.name
-    
           ], (err, rows, fields) => {
               if(err){
                   console.log("--------")
@@ -70,5 +71,21 @@ app.route('/tasks')
                       res.status(200);
                   })
               })
+              app.post('/upload', upload.single('houseImage'), (req, res, next) => {
+                let filename = req.file.filename
+                pool.query("INSERT INTO `house_image`(`house_name`, `image_url`) VALUES (? , ?)",
+                [
+                    filename,
+                    req.body.house_name
+
+              ], (err, rows, fields) => {
+                  if(err){
+                      console.log("--------")
+                      console.log(err);
+                  }
+                          res.status(200);
+                      })
+                  })
+
 };
 
