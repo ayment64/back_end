@@ -78,5 +78,44 @@ User.remove = function(id, result){
                 }
             });
 };
+User.remove = function(id, result){
+     sql.query("DELETE FROM Users WHERE id = ?", [id], function (err, res) {
 
+                if(err) {
+                    console.log("error: ", err);
+                    result(null, err);
+                }
+                else{
+
+                 result(null, res);
+                }
+            });
+};
+User.createBid = function (Username,image_url,the_bid,house_name, result) {
+    sql.query("INSERT INTO `biding`( `Username`, `image_url`, `the_bid`,`house_name`) VALUES (?,?,?,?)", [Username,image_url,the_bid,house_name], function (err, res) {
+
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                console.log(res.insertId);
+                result(null, res.insertId);
+            }
+        });
+};
+User.getAllBiding = function (house_name,result) {
+    sql.query("Select * from biding where house_name = ?",house_name, function (err, res) {
+
+            if(err) {
+                console.log("error: ", err);
+                result(null, err);
+            }
+            else{
+              console.log('bidings : ', res);
+
+             result(null, res);
+            }
+        });
+};
 module.exports= User;

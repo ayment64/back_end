@@ -24,7 +24,24 @@ exports.create_a_User = function(req, res) {
 
 })
 };
+exports.create_a_Bid = function(req, res) {
 
+  User.createBid(req.body.Username,req.body.image_url,req.body.the_bid,req.body.house_name, function(err, User) {
+    if (err)
+    res.send(err);
+    res.json(User);
+
+})
+};
+
+
+exports.list_all_Bidding = function(req, res) {
+  User.getAllBiding(req.params.house_name, function(err, User) {
+    if (err)
+      res.send(err);
+    res.json(User);
+  });
+};
 
 exports.read_a_User = function(req, res) {
   User.getUserById(req.params.Username,req.params.Password, function(err, User) {
