@@ -55,8 +55,19 @@ Estate.getAllEstate = function (result) {
                 }
             });
 };
-Estate.updateById = function(id, Estate, result){
-  sql.query("UPDATE Estates SET Estate = ? WHERE id = ?", [Estate.Estate, id], function (err, res) {
+Estate.updateById = function(Estate, result){
+  sql.query("UPDATE `estates` SET`adresse`=?,`type`=?,`forr`=?,`bedrooms`=?,`bathrooms`=?,`livingrooms`=?,`kitchens`=?,`gardens`=? WHERE name = ?", [
+      Estate.adresse,
+      Estate.type,
+      Estate.forr,
+      Estate.bedrooms,
+      Estate.bathrooms,
+      Estate.livingrooms,
+      Estate.kitchens,
+      Estate.gardens,
+      Estate.name
+    ],
+     function (err, res) {
           if(err) {
               console.log("error: ", err);
                 result(null, err);
@@ -67,7 +78,7 @@ Estate.updateById = function(id, Estate, result){
             });
 };
 Estate.remove = function(id, result){
-     sql.query("DELETE FROM Estates WHERE id = ?", [id], function (err, res) {
+     sql.query("DELETE FROM Estates WHERE name = ?", [id], function (err, res) {
 
                 if(err) {
                     console.log("error: ", err);

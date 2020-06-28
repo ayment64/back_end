@@ -32,21 +32,17 @@ exports.read_a_Estate = function(req, res) {
     res.json(Estate);
   });
 };
-
-
 exports.update_a_Estate = function(req, res) {
-  Estate.updateById(req.params.EstateId, new Estate(req.body), function(err, Estate) {
+  Estate.updateById(new Estate(req.body), function(err, Estate) {
     if (err)
       res.send(err);
     res.json(Estate);
   });
 };
-
-
 exports.delete_a_Estate = function(req, res) {
 
 
-  Estate.remove( req.params.EstateId, function(err, Estate) {
+  Estate.remove( req.params.name, function(err, Estate) {
     if (err)
       res.send(err);
     res.json({ message: 'Estate successfully deleted' });

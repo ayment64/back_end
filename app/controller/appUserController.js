@@ -42,6 +42,13 @@ exports.list_all_Bidding = function(req, res) {
     res.json(User);
   });
 };
+exports.list_all_pics = function(req, res) {
+  User.getAllpics(req.params.house_name, function(err, User) {
+    if (err)
+      res.send(err);
+    res.json(User);
+  });
+};
 
 exports.read_a_User = function(req, res) {
   User.getUserById(req.params.Username,req.params.Password, function(err, User) {
@@ -51,9 +58,17 @@ exports.read_a_User = function(req, res) {
   });
 };
 
+exports.read_A_User = function(req, res) {
+  User.getUserByEmail(req.params.Email, function(err, User) {
+    if (err)
+      res.send(err);
+    res.json(User);
+  });
+};
+
 
 exports.update_a_User = function(req, res) {
-  User.updateById(req.params.UserId, new User(req.body), function(err, User) {
+  User.updateByUsername(new User(req.body), function(err, User) {
     if (err)
       res.send(err);
     res.json(User);
